@@ -7,7 +7,6 @@
 		<title>Ejemplo Link HTML</title>
 	</head>
 	<body>
-
 		<script>
 			function loadFile(filePath) {
 				  var result = null;
@@ -20,41 +19,140 @@
 					}
 				  return result;
 				}
-		</script>
 
-		<div class="container">
-			<h3>Listado de Departamentos</h3>
+				function showContainer(container) {
+    				var containers = document.getElementsByClassName('container'), i;
+    				for (i = 0; i < containers.length; i += 1) {
+    					containers[i].style.display = 'none';
+    				};
+
+					document.getElementById("buttons").style.display = 'block';
+					document.getElementById(container).style.display = 'block';
+				};
+
+		</script>
+		<div class="container" id="buttons">
+			<button type="button" class="btn btn-primary" onclick="showContainer('cntdepartments')">Departments</button>
+			<button type="button" class="btn btn-primary" onclick="showContainer('cntmanagers')">Managers</button>
+			<button type="button" class="btn btn-primary" onclick="showContainer('cnttitles')">Titles</button>
 		</div>
 
-		<table class="table">
-			<thead>
-			  <tr> 
-				<th>Número</th> 
-				<th>Nombre</th>
-			  </tr>
-			</thead>
-			<tbody>
-			<script>
-					departments = loadFile('files/departments.csv');
-					lines = departments.split(/\r?\n/);
+		<br>
 
-					for(x=1; x<lines.length; x++) {
-						department = lines[x].split(';');
-						document.write('<tr><td><a href="departments.html?');
-						document.write('dept_no=');
-						document.write(department[0]);
-						document.write('&dept_name=');
-						document.write(department[1]);
-						document.write('">');
-						document.write(department[0]);
-						document.write('</a></td><td>');
-						document.write(department[1]);
-						document.write('</td></tr>');
-					};
+		<div class="container" id="cntdepartments">
+			<h3>Listado de Departamentos</h3>
 
-				</script>
-		</tbody>
-		</table>
+			<table class="table">
+				<thead>
+			  		<tr> 
+						<th>Número</th> 
+						<th>Nombre</th>
+			  		</tr>
+				</thead>
+				<tbody>
+					<script>
+						// Leer Archivo
+						departments = loadFile('files/departments.csv');
+
+						// Procesar el archivo
+						lines = departments.split(/\r?\n/);
+
+						for(x=1; x<lines.length; x++) {
+							department = lines[x].split(';'); // [d002,Finance]
+							document.write('<tr><td><a href="departments.html?');
+							document.write('dept_no=');
+							document.write(department[0]);
+							document.write('&dept_name=');
+							document.write(department[1]);
+							document.write('">');
+							document.write(department[0]);
+							document.write('</a></td><td>');
+							document.write(department[1]);
+							document.write('</td></tr>');
+						};
+					</script>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="container" id="cntmanagers" style="display: none">
+			<h3>Listado de Managers</h3>
+
+			<table class="table">
+				<thead>
+			  		<tr> 
+						<th>Número</th> 
+						<th>Nombre</th>
+						<th>Apellido</th> 
+						<th>Sexo</th>
+			  		</tr>
+				</thead>
+				<tbody>
+					<script>
+						// Leer Archivo
+						managers = loadFile('files/managers.csv');
+
+						// Procesar el archivo
+						lines = managers.split(/\r?\n/);
+
+						for(x=1; x<lines.length; x++) {
+							manager = lines[x].split(';'); // [d002,Finance]
+							document.write('<tr><td><a href="managers.html?');
+							document.write('emp_no=');
+							document.write(manager[0]);
+							document.write('&first_name=');
+							document.write(manager[1]);
+							document.write('&last_name=');
+							document.write(manager[2]);
+							document.write('&gender=');
+							document.write(manager[3]);
+							document.write('">');
+							document.write(manager[0]);
+							document.write('</a></td><td>');
+							document.write(manager[1]);
+							document.write('</td><td>');
+							document.write(manager[2]);
+							document.write('</td><td>');
+							document.write(manager[3]);
+							document.write('</td></tr>');
+						};
+					</script>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="container" id="cnttitles" style="display: none">
+			<h3>Listado de Titles</h3>
+
+			<table class="table">
+				<thead>
+			  		<tr> 
+						<th>Title</th> 
+			  		</tr>
+				</thead>
+				<tbody>
+					<script>
+						// Leer Archivo
+						titles = loadFile('files/titles.csv');
+
+						// Procesar el archivo
+						lines = titles.split(/\r?\n/);
+
+						for(x=1; x<lines.length; x++) {
+							title = lines[x].split(';'); 
+							document.write('<tr><td><a href="titles.html?');
+							document.write('title=');
+							document.write(title[0]);
+							document.write('">');
+							document.write(title[0]);
+							document.write('</a></td></tr>');
+						};
+					</script>
+				</tbody>
+			</table>
+		</div>
+
 
 		<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 	    	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
