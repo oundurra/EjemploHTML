@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+		<title>Ejemplo Link HTML</title>
+	</head>
+	<body>
+		<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+		<script>
+			function loadFile(filePath) {
+				var result = null;
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.open('GET', filePath, false);
+				xmlhttp.send();
+				  
+				if (xmlhttp.status==200) {
+					result = xmlhttp.responseText;
+				}
+				
+				return result;
+			};
+
+			function drawTable(file) {
+				lines = file.split(/\r?\n/);
+				headers = lines[0].split(";");
+				strtable = "<thead><tr>"
+				for (x=0; x < headers.length; x++) {
+					strtable += "<th>" + headers[x] + "</th>";
+				}
+				strtable += "</tr></thead>";
+				$("#table").html(strtable);
+			}
+
+			$(document).ready(function(){
+				$("button").click(function(){
+					file = loadFile(this.value);
+					drawTable(file);
+				});
+			});
+
+
+		</script>
+		<div class="container" id="buttons">
+			<button type="button" class="btn btn-primary" id="btnDepartments" value="files/departments.csv">Departments</button>
+			<button type="button" class="btn btn-primary" id="btnManagers" value="files/managers.csv">Managers</button>
+			<button type="button" class="btn btn-primary" id="btnTitles" value="files/titles.csv">Titles</button>
+		</div>
+
+		<br>
+
+		<div class="container"> 
+			<h3 id="title">Listado</h3>
+
+			<table class="table" id="table">
+			</table>
+		</div>
+
+	</body>
+</html>
