@@ -24,10 +24,10 @@
 				return result;
 			}
 
-			function showContainer(container) {
+			function showContainer(container) { // container = "cnttitles"
 					$(".container").hide();
 					$("#buttons").show();
-					$("#" + container).show();
+					$("#" + container).show(); // $("#cnttitles").show();
 			};
 
 			$(document).ready(function() {
@@ -102,7 +102,7 @@
 						lines = managers.split(/\r?\n/);
 
 						for(x=1; x<lines.length; x++) {
-							manager = lines[x].split(';'); // [d002,Finance]
+							manager = lines[x].split(';');
 							document.write('<tr><td><a href="managers.html?');
 							document.write('emp_no=');
 							document.write(manager[0]);
